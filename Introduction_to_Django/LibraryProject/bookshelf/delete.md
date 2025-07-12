@@ -1,4 +1,4 @@
-from bookshelf.models import book
+bookshelf.models import Book
 
 book.delete()
 Book.objects.all()
