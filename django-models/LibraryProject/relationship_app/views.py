@@ -3,7 +3,8 @@ from django.views.generic.detail import DetailView
 from .models import Book
 from .models import Library
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+frmo django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def list_books(request):
@@ -13,7 +14,7 @@ def list_books(request):
     books = Book.objects.all()
     return render(request, 'relationship_app/list_books.html', {'books': books})
 
-
+# Detail view for a specific library
 class LibraryDetailView(DetailView):
     model = Library
     template_name = 'relationship_app/library_detail.html'
@@ -23,6 +24,7 @@ class LibraryDetailView(DetailView):
 def home(request):
     return render(request, 'relationship_app/home.html') 
 
+# Login, Logout, and Register views
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
