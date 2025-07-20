@@ -6,7 +6,7 @@ from . import views
 urlpatterns = [
     path('books/', list_books, name='list_books'),
     path('libraries/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
-    path('login/', LoginView.as_view(template_name='relationship_app/login.html'), name='login'),
+     path('login/', LoginView.as_view(template_name='relationship_app/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
-    path('register/', RegisterView.as_view(template_name='relationship/register.html'), name='register'),  
+    path('register/', views.register, name='register'),  # You should define this in views.py
 ]
