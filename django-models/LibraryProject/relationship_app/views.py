@@ -7,8 +7,12 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import user_passes_test
 from django.contrib.auth.decorators import permission_required
+from .forms import BookForm
+from .forms import CustomUserRegistrationForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required
 def list_books(request):
     """
     View to list all books in the library.
@@ -43,13 +47,13 @@ def logout_view(request):
 
 def register(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = CustomUserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('list_books')  # redirect to a valid page
     else:
-        form = UserCreationForm()
+        form = CustomUserRegistrationForm()
     return render(request, 'relationship_app/register.html', {'form': form})
 
 #is admin, is_librarian, and is_member decorators
