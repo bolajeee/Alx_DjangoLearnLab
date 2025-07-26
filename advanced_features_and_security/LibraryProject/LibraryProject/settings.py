@@ -23,9 +23,29 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-api%&v!yx+*-j+j02)d@fyd@d-0_vtvek1rgrxxpqv00@=0-qm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False  # Disable in production
 
-ALLOWED_HOSTS = []
+# Prevent content sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Activate browser XSS filtering
+SECURE_BROWSER_XSS_FILTER = True
+
+# Prevent the site from being framed (clickjacking)
+X_FRAME_OPTIONS = 'DENY'
+
+# CSRF and session cookies over HTTPS only
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
+# HSTS settings (optional but recommended for production)
+SECURE_HSTS_SECONDS = 31536000
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']  # for development
+
 
 
 # Application definition
