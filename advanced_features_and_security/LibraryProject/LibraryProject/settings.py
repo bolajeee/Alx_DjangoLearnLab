@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'bookshelf',
     'relationship_app',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -125,3 +126,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #custom login and logout url
 LOGIN_URL = '/auth/login'
 LOGOUT_URL = '/auth/logout'
+
+# Custom user model
+AUTH_USER_MODEL = 'bookshelf.CustomUser'
