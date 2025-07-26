@@ -22,7 +22,7 @@ from bookshelf import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home, name='home'),
+    # path('', views.home, name='home'),
     path('', include('relationship_app.urls')),
     path('auth/', include('relationship_app.urls')),
     path('bookshelf/', include('bookshelf.urls')),

@@ -1,9 +1,8 @@
 # relationship_app/urls.py
 from django.urls import path
-from .views import list_books, LibraryDetailView
+from .views import book_list
 from . import views
-from .views import admin_dashboard, librarian_dashboard, member_dashboard
 
 urlpatterns = [
-    path('books/', list_books, name='book_list'),
+    path('books/', book_list, name='book_list'),
 ]

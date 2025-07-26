@@ -36,13 +36,13 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(username, email, password, **extra_fields)
 
 # Permissions
-class post(models.Model):
+class permission(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
 
     class Meta:
         permissions = [
-             ("can_view", "Can view post"),
+            ("can_view", "Can view post"),
             ("can_create", "Can create post"),
             ("can_edit", "Can edit post"),
             ("can_delete", "Can delete post"),
