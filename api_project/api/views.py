@@ -5,6 +5,7 @@ from .models import Book
 from .serializers import BookSerializer
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
+
 # Create your views here.
 class BookList(generics.ListAPIView):
     queryset = Book.objects.all()
@@ -23,7 +24,8 @@ class CustomAuthToken(ObtainAuthToken):
     Custom token auth view that returns token and user details
     """
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data, context={'request': request})
+        serializer = self.serializer_class(data=request.data, 
+        context={'request': request})
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data['user']
         token, created = Token.objects.get_or_create(user=user)
