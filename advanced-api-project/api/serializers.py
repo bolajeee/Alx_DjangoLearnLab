@@ -1,10 +1,10 @@
 from rest_framework import serializers
-from .models import Boos, Author
+from .models import Book, Author
 
 # Serializers for the books app
 class BookSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Books
+        model = Book
         fields = ['title', 'publication_year', 'author']
         read_only_fields = ['id']
 
