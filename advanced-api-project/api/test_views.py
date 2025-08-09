@@ -3,12 +3,16 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 from .models import Book, Author
+from rest_framework.authtoken.models import Token
 
 
 class BookAPITestCase(APITestCase):
     def setUp(self):
         # Create user for authenticated actions
         self.user = User.objects.create_user(username="testuser", password="testpass")
+        # comment the next 2 lines if you want to use session authentication
+        self.token = Token.objects.create(user=self.user) 
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + self.token.key)
 
         # Create author and books
         self.author = Author.objects.create(name="Author One")
