@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Login{% endblock %}
 {% block content %}
+{% load static %}
+{% load i18n %}
+
+{% block header %}
 <link rel="stylesheet" href="{% static 'css/login.css' %}">
 <h1>Login</h1>
 <form method="post" novalidate>
