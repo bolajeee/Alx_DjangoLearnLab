@@ -127,6 +127,9 @@ STATICFILES_DIRS = [
     BASE_DIR / "blog" / "static",
 ]
 
+# For production (when you run collectstatic)
+# STATIC_ROOT = BASE_DIR / "blog" / "static"
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
