@@ -1,13 +1,9 @@
 {% extends 'base.html' %}
 {% block title %}Register{% endblock %}
-{% block content %}
 {% load static %}
 {% load i18n %}
+{% block content %}
 
-{% block header %}
-<head>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
 <h1>Create an account</h1>
 <form method="post" novalidate>
   {% csrf_token %}
