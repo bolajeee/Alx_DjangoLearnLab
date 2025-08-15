@@ -3,18 +3,19 @@
 {% load static %}
 {% load i18n %}
 {% block content %}
-
-<h1>Create an account</h1>
-<form method="post" novalidate>
-  {% csrf_token %}
-  {{ form.non_field_errors }}
-  {% for field in form %}
-  <div>
-    {{ field.label_tag }} {{ field }}
-    {% if field.errors %}<div class="error">{{ field.errors|striptags }}</div>{% endif %}
-  </div>
-  {% endfor %}
-  <button type="submit">Sign up</button>
-</form>
-<p>Already have an account? <a href="{% url 'login' %}">Login</a>.</p>
+<div class="form-container">
+  <h1>Create an account</h1>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div>
+      {{ field.label_tag }} {{ field }}
+      {% if field.errors %}<div class="error">{{ field.errors|striptags }}</div>{% endif %}
+    </div>
+    {% endfor %}
+    <button type="submit">Sign up</button>
+  </form>
+  <p>Already have an account? <a href="{% url 'login' %}">Login</a>.</p>
+</div>
 {% endblock %}

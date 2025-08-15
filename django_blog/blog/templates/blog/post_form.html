@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}
+    {% if form.instance.pk %}Edit Post{% else %}New Post{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <h1>{% if form.instance.pk %}Edit Post{% else %}Create New Post{% endif %}</h1>
+    
+    <form method="post">
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        
+        <div>
+            {{ form.title.label_tag }}
+            {{ form.title }}
+            {% if form.title.errors %}
+                <div class="error">{{ form.title.errors|striptags }}</div>
+            {% endif %}
+        </div>
+        
+        <div>
+            {{ form.content.label_tag }}
+            {{ form.content }}
+            {% if form.content.errors %}
+                <div class="error">{{ form.content.errors|striptags }}</div>
+            {% endif %}
+        </div>
+        
+        <button type="submit">
+            {% if form.instance.pk %}Update Post{% else %}Create Post{% endif %}
+        </button>
+    </form>
+    
+    <p><a href="{% url 'post-list' %}">← Back to Posts</a></p>
+</div>
+{% endblock %}
