@@ -8,11 +8,11 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 
 # --- Authentication views (login/logout) via Django's built-ins:
 class BlogLoginView(LoginView):
-    template_name = 'registration/login.html'     # uses auth system
+    template_name = 'templates/registration/login.html'     # uses auth system
     redirect_authenticated_user = True
 
 class BlogLogoutView(LogoutView):
-    template_name = 'registration/logout.html'
+    template_name = 'templates/registration/logout.html'
 
 # --- Registration
 def register(request):
@@ -29,7 +29,7 @@ def register(request):
             messages.error(request, 'Please correct the errors below.')
     else:
         form = UserRegisterForm()
-    return render(request, 'registration/register.html', {'form': form})
+    return render(request, 'templates/registration/register.html', {'form': form})
 
 # --- Profile view (view + edit)
 @login_required
@@ -49,4 +49,4 @@ def profile(request):
         p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {'u_form': u_form, 'p_form': p_form}
-    return render(request, 'registration/profile.html', context)
+    return render(request, 'templates/registration/profile.html', context)
