@@ -3,9 +3,16 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import uuid
+import os
 
 def avatar_upload_path(instance, filename):
-    return f'profile_pics/user_{instance.user.id}/{filename}'
+    # return f'profile_pics/user_{instance.user.id}/{filename}' # this will create a directory for each user
+    # Generate a unique filename using UUID
+
+    ext = filename.split('.')[-1]  # get file extension
+    unique_filename = f"{uuid.uuid4()}.{ext}"
+    return os.path.join("profile_pics", f"user_{instance.user.id}", unique_filename)
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
