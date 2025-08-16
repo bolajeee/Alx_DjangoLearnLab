@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.dispatch import receiver # Signal to create/update profile automatically
+from taggit.managers import TaggableManager # Optional: If you want to use tags for posts
 import uuid
 import os
 
@@ -29,6 +30,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         'auth.User', on_delete=models.CASCADE, related_name='blogs'
     )
+    tags = TaggableManager(blank=True)  # Optional: If you want to use tags for posts
     
     def __str__(self):
         return self.title
@@ -50,6 +52,10 @@ class Comment(models.Model):
     def __str__(self):
         return f'Comment by {self.author.username} on {self.post.title}'
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50, unique=True)
+    def __str__(self):
+        return self.name
 
 # Signal to automatically create profile when user is created
 @receiver(post_save, sender=User)

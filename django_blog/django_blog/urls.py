@@ -22,6 +22,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),  # Include blog app URLs
+    
 ]
 
 # Serve static and media files in development

@@ -41,6 +41,9 @@ INSTALLED_APPS = [
 
     # Custom apps
     'blog',
+
+    # Third-party apps
+    'taggit',  # For tagging posts
 ]
 
 MIDDLEWARE = [
