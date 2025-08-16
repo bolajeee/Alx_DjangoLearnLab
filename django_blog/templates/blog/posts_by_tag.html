@@ -1,6 +1,14 @@
 {% extends "base.html" %}
-
+{% load static %}
+{% load i18n %}
 {% block title %}Posts tagged "{{ tag.name }}"{% endblock %}
+
+
+{% block styles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+{% endblock %}
 
 {% block content %}
 <div class="container">

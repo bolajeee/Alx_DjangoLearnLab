@@ -2,6 +2,14 @@
 {% block title %}
     {% if form.instance.pk %}Edit Post{% else %}New Post{% endif %}
 {% endblock %}
+{% load static %}
+{% load i18n %} 
+
+{% block styles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+{% endblock %}
 
 {% block content %}
 <div class="form-container">

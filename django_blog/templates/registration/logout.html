@@ -2,8 +2,15 @@
 {% block title %}Logged out{% endblock %}
 {% load static %}
 {% load i18n %}
+
 {% block content %}
 
+{% block styles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Logged out{% endblock %}</title>
+</head>
+{% endblock %}
 
 <h1>You’ve been logged out.</h1>
 <p><a href="{% url 'login' %}">Login again</a></p>

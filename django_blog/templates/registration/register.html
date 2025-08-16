@@ -2,6 +2,14 @@
 {% block title %}Register{% endblock %}
 {% load static %}
 {% load i18n %}
+
+{% block styles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Register{% endblock %}</title>
+</head>
+{% endblock %}
+
 {% block content %}
 <div class="form-container">
   <h1>Create an account</h1>

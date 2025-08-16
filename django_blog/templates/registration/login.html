@@ -3,6 +3,13 @@
 {% load static %}
 {% load i18n %}
 
+{% block styles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{% block title %}Login{% endblock %}</title>
+</head>
+{% endblock %}
+
 {% block content %}
 <div class="form-container">
   <h1>Login</h1>

@@ -53,9 +53,17 @@ header nav ul li a:hover {
 
 /* Container */
 .container {
-    max-width: 900px;
-    margin: 30px auto;
+ max-width: 1200px;
+    margin: 40px auto;
     padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+/* Center the content */
+.content {
+    text-align: center;
 }
 
 /* Buttons */
@@ -194,6 +202,12 @@ header nav ul li a:hover {
 
 .form-container h1 {
     color: #008080;
+    margin: 0 auto;
+    max-width: 450px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
 }
 
 .form-container input, 

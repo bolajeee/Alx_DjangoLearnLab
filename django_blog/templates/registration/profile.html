@@ -1,5 +1,16 @@
 {% extends 'base.html' %}
 {% block title %}Your Profile{% endblock %}
+{% load static %}
+{% load i18n %}
+
+{% block styles %}
+<head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Profile</title>
+</head> 
+{% endblock %}
+
+
 {% block content %}
 <h1>Profile</h1>
 

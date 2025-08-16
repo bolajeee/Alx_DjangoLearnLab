@@ -57,16 +57,32 @@ def profile(request):
     context = {'u_form': u_form, 'p_form': p_form}
     return render(request, 'registration/profile.html', context)
 
-def search_posts(request):
-    query = request.GET.get('q')
-    results = []
-    if query:
-        results = Post.objects.filter(
-            Q(title__icontains=query) |
-            Q(content__icontains=query) |
-            Q(tags__name__icontains=query)  # if using ManyToMany
-        ).distinct()
-    return render(request, 'blog/search_results.html', {'results': results, 'query': query})
+# Search posts by title or content FBV
+# def search_posts(request):
+#     query = request.GET.get('q', '')
+#     results = []
+#     if query:
+#         results = Post.objects.filter(
+#             Q(title__icontains=query) |
+#             Q(content__icontains=query) 
+#             Q(tags__name__icontains=query)  # if using ManyToMany
+#         ).distinct()
+#     return render(request, 'blog/search_results.html', {'results': results, 'query': query})
+
+class PostSearchView(ListView):
+    model = Post
+    template_name = "search_results.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        if query:
+            return Post.objects.filter(
+                Q(title__icontains=query) | 
+                Q(content__icontains=query) |
+                Q(tags__name__icontains=query)
+            ).distinct()
+        return Post.objects.none()  # return empty if no query
 
 class PostByTagListView(ListView):
     model = Post
