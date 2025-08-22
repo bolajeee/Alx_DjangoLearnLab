@@ -2,12 +2,17 @@ from rest_framework import generics, permissions, status
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import get_user_model
-from .serializers import RegisterSerializer, LoginSerializer, PostSerializer
+from .serializers import RegisterSerializer, LoginSerializer
 from django.shortcuts import get_object_or_404
+from django.http import JsonResponse
+from django.contrib.auth import get_user_model
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 from .models import Post
 from rest_framework.views import APIView
 
 User = get_user_model()
+CustomUser = get_user_model()
 
 class RegisterView(generics.CreateAPIView):
     serializer_class = RegisterSerializer
@@ -81,3 +86,26 @@ class FeedView(generics.ListAPIView):
         # get posts from users the current user follows
         followed_users = self.request.user.following.all()
         return Post.objects.filter(author__in=followed_users).order_by("-created_at")
+
+# List all users (this is where CustomUser.objects.all() comes in)
+def list_users(request):
+    users = CustomUser.objects.all().values("id", "username", "email")
+    return JsonResponse(list(users), safe=False)
+
+
+@csrf_exempt
+@require_POST
+def follow_user(request, user_id):
+    current_user = request.user
+    target_user = get_object_or_404(CustomUser, id=user_id)
+    current_user.follow(target_user)
+    return JsonResponse({"message": f"You are now following {target_user.username}"})
+
+
+@csrf_exempt
+@require_POST
+def unfollow_user(request, user_id):
+    current_user = request.user
+    target_user = get_object_or_404(CustomUser, id=user_id)
+    current_user.unfollow(target_user)
+    return JsonResponse({"message": f"You unfollowed {target_user.username}"})

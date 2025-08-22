@@ -22,6 +22,17 @@ class CustomUser(AbstractUser):
         related_name="user_followers",
         blank=True
     )
+
+    def follow(self, user):
+        """Follow another user"""
+        if user != self:
+            self.following.add(user)
+
+    def unfollow(self, user):
+        """Unfollow another user"""
+        if user != self:
+            self.following.remove(user)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
