@@ -40,3 +40,6 @@ class PostViewSet(viewsets.ModelViewSet):
         posts = Post.objects.filter(author__in=following_users).order_by("-created_at")
         serializer = self.get_serializer(posts, many=True)
         return Response(serializer.data)
+
+def feed_view(request):
+    return JsonResponse({"message": "This is the feed endpoint"})
