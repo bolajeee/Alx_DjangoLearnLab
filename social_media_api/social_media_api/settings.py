@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # Created apps
     'accounts',
-    'posts'
+    'posts',
 
     # Packages
     'rest_framework',
