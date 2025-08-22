@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from django.conf import settings
+
 # Create your models here.
 class CustomUser(AbstractUser):
     bio = models.TextField(max_length=500, blank=True)
@@ -8,7 +10,15 @@ class CustomUser(AbstractUser):
     followers = models.ManyToManyField(
         'self',
         symmetrical=False,
-        related_name='following',
+        related_name='user_following',
+        blank=True
+    )
+
+    # users that THIS user is following
+    following = models.ManyToManyField(
+        "self",
+        symmetrical=False,
+        related_name="user_followers",
         blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
@@ -24,3 +34,11 @@ class CustomUser(AbstractUser):
     @property
     def following_count(self):
         return self.following.count()
+
+class Post(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts")
+    content = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Post by {self.author.username} at {self.created_at}"
