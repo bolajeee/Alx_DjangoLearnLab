@@ -92,7 +92,6 @@ def list_users(request):
     users = CustomUser.objects.all().values("id", "username", "email")
     return JsonResponse(list(users), safe=False)
 
-
 @csrf_exempt
 @require_POST
 def follow_user(request, user_id):
@@ -101,7 +100,6 @@ def follow_user(request, user_id):
     current_user.follow(target_user)
     return JsonResponse({"message": f"You are now following {target_user.username}"})
 
-
 @csrf_exempt
 @require_POST
 def unfollow_user(request, user_id):
@@ -109,3 +107,19 @@ def unfollow_user(request, user_id):
     target_user = get_object_or_404(CustomUser, id=user_id)
     current_user.unfollow(target_user)
     return JsonResponse({"message": f"You unfollowed {target_user.username}"})
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = CustomUser.objects.all()
+    serializer_class = UserSerializer
+
+    @action(detail=True, methods=["post"])
+    def follow(self, request, pk=None):
+        user_to_follow = get_object_or_404(CustomUser, pk=pk)
+        request.user.follow(user_to_follow)
+        return Response({"message": f"You are now following {user_to_follow.username}"}, status=status.HTTP_200_OK)
+
+    @action(detail=True, methods=["post"])
+    def unfollow(self, request, pk=None):
+        user_to_unfollow = get_object_or_404(CustomUser, pk=pk)
+        request.user.unfollow(user_to_unfollow)
+        return Response({"message": f"You unfollowed {user_to_unfollow.username}"}, status=status.HTTP_200_OK)
