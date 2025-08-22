@@ -19,6 +19,7 @@ class BlogLoginView(LoginView):
 
 class BlogLogoutView(LogoutView):
     template_name = 'registration/logout.html'
+    # Note: LogoutView does not require a template, but you can provide one if you want to show a message after logout.
 
 # --- Registration
 def register(request):
